@@ -1,0 +1,468 @@
+/* CSS Variables & Theme System */
+:root {
+  --bg-gradient: linear-gradient(135deg, #ffe5ec 0%, #f0e6ff 50%, #e8f0fe 100%);
+  --panel-bg: rgba(255, 255, 255, 0.9);
+  --panel-border: rgba(255, 255, 255, 0.7);
+  --panel-shadow: 0 8px 32px rgba(159, 122, 234, 0.08), 0 4px 12px rgba(0, 0, 0, 0.02);
+  
+  --primary-color: #9f7aea; /* Softer lavender purple */
+  --primary-hover: #805ad5;
+  --secondary-color: #ebf8ff; /* Soft pastel blue */
+  --secondary-text: #6b5c7b; /* Mid-tone purple-gray */
+  --text-main: #3b2c4c; /* Deep violet-gray for high contrast readability */
+  --success-color: #10b981;
+  --danger-color: #ef4444;
+  --gold-accent: #e2b747; /* Soft gold border */
+  
+  --font-family: 'Outfit', 'Anuphan', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Global Reset & Base Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: var(--font-family);
+  background: var(--bg-gradient);
+  color: var(--text-main);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 15px;
+  overflow-x: hidden;
+}
+
+.game-container {
+  width: 100%;
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Header & Title Section */
+.game-header {
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.game-title {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--primary-color);
+  letter-spacing: -0.5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-shadow: 0 2px 4px rgba(124, 58, 237, 0.1);
+}
+
+.logo-emoji {
+  animation: logoBounce 2.5s infinite ease-in-out;
+  display: inline-block;
+}
+
+.game-subtitle {
+  font-size: 0.95rem;
+  color: var(--secondary-text);
+  font-weight: 400;
+}
+
+/* Stats Panel (Glassmorphism) */
+.stats-panel {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+  max-width: 600px;
+  background: var(--panel-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--panel-border);
+  box-shadow: var(--panel-shadow);
+  padding: 12px 20px;
+  border-radius: 18px;
+  justify-content: space-around;
+  margin-top: 10px;
+}
+
+.stat-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  flex: 1;
+}
+
+.stat-box:not(:last-child) {
+  border-right: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--secondary-text);
+  font-weight: 600;
+}
+
+.stat-value {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--primary-color);
+}
+
+.best-score-box .stat-value {
+  color: var(--gold-accent);
+}
+
+/* Controls Panel */
+.controls-panel {
+  display: flex;
+  gap: 10px;
+  margin-top: 5px;
+}
+
+/* Buttons */
+.btn {
+  font-family: var(--font-family);
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: var(--transition-smooth);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.04);
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn-primary {
+  background: var(--primary-color);
+  color: white;
+}
+
+.btn-primary:hover {
+  background: var(--primary-hover);
+  box-shadow: 0 6px 15px rgba(124, 58, 237, 0.25);
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background: white;
+  color: var(--text-main);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.btn-secondary:hover {
+  background: #f9fafb;
+  border-color: rgba(0, 0, 0, 0.15);
+  transform: translateY(-1px);
+}
+
+.btn-large {
+  font-size: 1.1rem;
+  padding: 14px 28px;
+  border-radius: 16px;
+}
+
+.icon {
+  width: 16px;
+  height: 16px;
+}
+
+/* Game Board Wrapper & Layout */
+.game-board-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.game-board {
+  display: grid;
+  width: 100%;
+  max-width: 780px;
+  gap: 12px;
+  margin: 0 auto;
+}
+
+/* Responsive Grid setup */
+/* PC/Tablet: 6 Columns x 4 Rows */
+@media (min-width: 601px) {
+  .game-board {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+/* Mobile: 4 Columns x 6 Rows */
+@media (max-width: 600px) {
+  .game-board {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+  }
+}
+
+/* Card 3D Flip System */
+.card-container {
+  aspect-ratio: 5 / 7; /* Golden Tarot Card aspect ratio */
+  perspective: 1000px;
+  cursor: pointer;
+}
+
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.25);
+}
+
+.card-container:hover .card-inner:not(.flipped):not(.matched) {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 12px 24px rgba(124, 58, 237, 0.15);
+}
+
+/* Trigger flipped state */
+.card-inner.flipped {
+  transform: rotateY(180deg);
+}
+
+.card-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+  border: 2px solid white;
+  transition: var(--transition-smooth);
+}
+
+/* Card Back: Purple Mystic Tarot Star Design */
+.card-back {
+  background: #e8dbfc;
+  background-image: url('assets/card-back.svg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border: 2px solid var(--gold-accent);
+}
+
+/* Card Front: White background with fruit character */
+.card-front {
+  background: white;
+  transform: rotateY(180deg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+  overflow: hidden;
+}
+
+.fruit-image {
+  max-width: 90%;
+  max-height: 90%;
+  object-fit: contain;
+  /* Multiply blending to make the white background of the generated JPG transparent */
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+/* Card Match States */
+.card-inner.matched .card-front {
+  border-color: var(--success-color);
+  animation: matchSuccess 0.5s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+  box-shadow: 0 0 15px rgba(16, 185, 129, 0.4);
+}
+
+.card-inner.mismatch .card-front {
+  border-color: var(--danger-color);
+  animation: shake 0.5s ease-in-out forwards;
+  box-shadow: 0 0 15px rgba(239, 68, 68, 0.4);
+}
+
+/* Footer style */
+.game-footer {
+  font-size: 0.8rem;
+  color: var(--secondary-text);
+  text-align: center;
+  margin-top: 15px;
+  opacity: 0.7;
+}
+
+/* Victory Modal Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(49, 13, 72, 0.4);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+  padding: 20px;
+}
+
+.modal-overlay.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-content {
+  background: white;
+  padding: 30px;
+  border-radius: 24px;
+  max-width: 450px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 20px 50px rgba(49, 13, 72, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  transform: scale(0.8) translateY(30px);
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.modal-overlay.show .modal-content {
+  transform: scale(1) translateY(0);
+}
+
+.modal-confetti {
+  font-size: 2.5rem;
+  margin-bottom: 12px;
+  animation: logoBounce 1.5s infinite ease-in-out;
+}
+
+.modal-title {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--primary-color);
+  margin-bottom: 8px;
+}
+
+.modal-description {
+  font-size: 0.95rem;
+  color: var(--secondary-text);
+  margin-bottom: 24px;
+  line-height: 1.5;
+}
+
+.modal-stats {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 24px;
+}
+
+.modal-stat-card {
+  flex: 1;
+  background: var(--secondary-color);
+  padding: 16px;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  border: 1px solid rgba(124, 58, 237, 0.05);
+}
+
+.modal-stat-lbl {
+  font-size: 0.8rem;
+  color: var(--secondary-text);
+  font-weight: 600;
+}
+
+.modal-stat-val {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--primary-color);
+}
+
+.new-record-badge {
+  background: linear-gradient(45deg, #f59e0b, #d97706);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  display: inline-block;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 10px rgba(217, 119, 6, 0.3);
+  animation: badgePulse 1.5s infinite;
+}
+
+.hide {
+  display: none !important;
+}
+
+/* Animations */
+@keyframes logoBounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes matchSuccess {
+  0% {
+    transform: rotateY(180deg) scale(1);
+  }
+  50% {
+    transform: rotateY(180deg) scale(1.08);
+  }
+  100% {
+    transform: rotateY(180deg) scale(1);
+  }
+}
+
+@keyframes shake {
+  0%, 100% {
+    transform: rotateY(180deg) translateX(0);
+  }
+  20%, 60% {
+    transform: rotateY(180deg) translateX(-6px);
+  }
+  40%, 80% {
+    transform: rotateY(180deg) translateX(6px);
+  }
+}
+
+@keyframes badgePulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+/* Animations support for disabled sound / high contrast */
+@media (prefers-reduced-motion: reduce) {
+  .card-inner {
+    transition: transform 0.1s ease;
+  }
+}

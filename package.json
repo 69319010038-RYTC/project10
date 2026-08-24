@@ -1,0 +1,17 @@
+{
+  "name": "fruit-matcher",
+  "version": "1.0.0",
+  "description": "เกมส์จับคู่การ์ดผลไม้แสนน่ารัก (Cute Fruit Matching Game)",
+  "scripts": {
+    "start": "npx -y http-server -p 8080"
+  },
+  "keywords": [
+    "memory-game",
+    "matching-cards",
+    "javascript",
+    "html5",
+    "css3"
+  ],
+  "author": "Antigravity",
+  "license": "ISC"
+}
